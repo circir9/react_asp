@@ -1,0 +1,20 @@
+.top_layout {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background: rgb(174, 205, 252);
+    width: 1920px;
+}
+
+.top_link {
+    margin: 10px;
+    border-radius: 5px;
+    background: rgb(233, 231, 231);
+    cursor: pointer;
+    padding: 5px;
+    position: relative;
+}
+
+.top_link:hover {
+    background-color: #dded81;
+  }
