@@ -52,11 +52,9 @@ public class VisitorMessageController : ControllerBase{
             return NotFound();
         }
 
-        existingVisitor.Name = updateModel.Name;
         existingVisitor.Message = updateModel.Message;
 
         var update = Builders<Visitor>.Update
-            .Set(s => s.Name, existingVisitor.Name)
             .Set(s => s.Message, existingVisitor.Message);
 
         await _visitors.UpdateOneAsync(s => s._id == id, update);
