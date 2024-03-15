@@ -1,0 +1,10 @@
+.board-and-btn{
+    position: relative;
+}
+
+.board-and-btn button{
+    position: absolute;
+    width: 50px;
+    right: 0px;
+    top: 0px;
+}

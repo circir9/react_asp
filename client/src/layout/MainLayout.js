@@ -8,7 +8,14 @@ const MainLayout = (props) => {
             <nav className='top_layout'>
                 <Link to="/" className="container_top_link">
                     <p className="top_link">
-                        點我連到第一頁
+                        主頁
+                    </p>
+                </Link>
+            </nav>
+            <nav className='main_layout'>
+                <Link to="/visitor" className="container_main_link">
+                    <p className="main_link">
+                        訪客留言
                     </p>
                 </Link>
             </nav>
