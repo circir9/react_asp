@@ -1,22 +1,32 @@
 .message-board-container{
     position: relative;
+    width: 1500px;
+}
+
+.post-visitor-message-container{
+    position: relative;
+    left: 665px;
+    width: fit-content;
 }
 
 .visitor-message-list{
     position: relative;
+    width: 1400px;
 }
 
 .p-visitor-name{
     position: relative;
     width: 50px;
     margin-left: 10px;
-    left: 0;
-    top: 0;
+    left: 50px;
+    bottom: 26px;
+    font-weight: bold;
+    word-break: break-all;
 }
 
 .p-v-message{
     position: relative;
-    left: 50px;
-    bottom: 30px;
-    width: 650px;
+    left: 120px;
+    bottom: 56px;
+    width: 1200px;
 }

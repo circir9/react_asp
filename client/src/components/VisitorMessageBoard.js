@@ -25,26 +25,44 @@ class VisitorMessageBoard extends Component {
   };
 
   handleEditSubmit = () => {
+    const { MaximumWordCount } = this.props;
     const { editText } = this.state;
     const { CallbackFn } = this.props;
 
-    CallbackFn(editText);
-    this.setState({
-      message: editText,
-      isEditing: false
-    });
+    if(MaximumWordCount){
+      if(editText.length<=MaximumWordCount){
+        CallbackFn(editText);
+        this.setState({
+          message: editText,
+          isEditing: false
+        });
+      }
+      else{
+        CallbackFn(editText);
+        this.setState({
+          isEditing: false
+        });
+      }
+    }
+    else{
+      CallbackFn(editText);
+      this.setState({
+        message: editText,
+        isEditing: false
+      });
+    }
   };
 
   render() {
     const { message, editText, isEditing } = this.state;
 
     return (
-      <div style={{width:800}}>
+      <div style={{width:1100}}>
         {isEditing ? (
           <div className='board-and-btn'>
-            <div className='input-board-container' style={{width:650}}>
+            <div className='input-board-container' style={{width:1000}}>
               <textarea
-                style={{width:700}}
+                style={{width:1000}}
                 className='input-board-editing'
                 value={editText}
                 onChange={this.handleEditChange}
@@ -54,9 +72,9 @@ class VisitorMessageBoard extends Component {
           </div>
         ) : (
           <div className='board-and-btn'>
-            <div className='input-board-container' style={{width:650}}>
+            <div className='input-board-container' style={{width:1000}}>
               <div className="input-board" onDoubleClick={this.handleDoubleClick}>
-                {message? (<pre style={{width:700}}>{message}</pre>) : (<pre style={{width:700}}>    </pre>)}
+                {message? (<pre style={{width:1000}}>{message}</pre>) : (<pre style={{width:1000}}>    </pre>)}
               </div>
             </div>
           </div>
