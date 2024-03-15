@@ -56,7 +56,7 @@ class VisitorMessageBoard extends Component {
           <div className='board-and-btn'>
             <div className='input-board-container' style={{width:650}}>
               <div className="input-board" onDoubleClick={this.handleDoubleClick}>
-                <pre style={{width:700}}>{message}</pre>
+                {message? (<pre style={{width:700}}>{message}</pre>) : (<pre style={{width:700}}>    </pre>)}
               </div>
             </div>
           </div>

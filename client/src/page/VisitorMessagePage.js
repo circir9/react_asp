@@ -12,6 +12,7 @@ const VisitorMessagePage  = () =>{
     }, []);
 
     const handleClick = (id, messages) => {
+        messages = messages?(messages):("");
         axios.patch(`${process.env.REACT_APP_API_SERVER_URL}/api/VisitorMessage/${id}`,
         {
             message: messages
@@ -29,6 +30,7 @@ const VisitorMessagePage  = () =>{
             <div>
             {
                 visitors.map((item) => {
+                    item.message = item.message?(item.message):("    ");
                     return <ul 
                         className="visitor-message-list"
                         key={item._id}
