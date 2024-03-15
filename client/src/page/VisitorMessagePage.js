@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import VisitorMessageBoard from "../components/VisitorMessageBoard";
+import "./VisitorMessagePage.css"
 
 const VisitorMessagePage  = () =>{
     const [visitors, setVisitors] = useState([]);
@@ -35,10 +36,10 @@ const VisitorMessagePage  = () =>{
                         className="visitor-message-list"
                         key={item._id}
                     >
-                        <div>
-                            {item.name}
+                        <div className='p-visitor-name'>
+                            {item.name}:
                         </div>
-                        <div style={{ cursor: 'pointer' }}>
+                        <div className='p-v-message' style={{cursor: 'pointer'}}>
                             <VisitorMessageBoard CallbackFn={(message) => handleClick(item._id, message)} message={item.message} />
                         </div>
                     </ul>;

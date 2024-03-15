@@ -1,0 +1,22 @@
+.message-board-container{
+    position: relative;
+}
+
+.visitor-message-list{
+    position: relative;
+}
+
+.p-visitor-name{
+    position: relative;
+    width: 50px;
+    margin-left: 10px;
+    left: 0;
+    top: 0;
+}
+
+.p-v-message{
+    position: relative;
+    left: 50px;
+    bottom: 30px;
+    width: 650px;
+}

@@ -39,7 +39,7 @@ class VisitorMessageBoard extends Component {
     const { message, editText, isEditing } = this.state;
 
     return (
-      <div style={{margin: 2, width:800}}>
+      <div style={{width:800}}>
         {isEditing ? (
           <div className='board-and-btn'>
             <div className='input-board-container' style={{width:650}}>
