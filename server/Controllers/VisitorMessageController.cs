@@ -46,7 +46,7 @@ public class VisitorMessageController : ControllerBase{
 
     [Route("{id}")]
     [HttpPatch]
-    public async Task<IActionResult> Patch(string id, VisitorUpdateModel updateModel){
+    public async Task<IActionResult> Patch(string id,[FromBody]VisitorUpdateModel updateModel){
         var existingVisitor = await _visitors.Find(s => s._id == id).FirstOrDefaultAsync();
         if (existingVisitor == null){
             return NotFound();
