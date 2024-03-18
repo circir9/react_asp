@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import VisitorMessageBoard from "../components/VisitorMessageBoard";
+import VisitorMessageBoard from "../components/MessageBoard/VisitorMessageBoard";
 import "./VisitorMessagePage.css"
 
 const VisitorMessagePage  = () =>{
     const [visitors, setVisitors] = useState([]);
     const [postName, setPostName] = useState("");
     const [postMessage, setPostMessage] = useState("");
-    const MaximumWords = 100;
+    const maxCount = 100;
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_SERVER_URL}/api/VisitorMessage` ,{credentials: "include"})
@@ -16,27 +16,22 @@ const VisitorMessagePage  = () =>{
     }, []);
 
     const handleClick = (id, messages) => {
-        if(messages.length<=MaximumWords){
-            axios.patch(`${process.env.REACT_APP_API_SERVER_URL}/api/VisitorMessage/${id}`,
-            {
-                message: messages
-            },
-            {
-                headers: {
-                'Content-Type': 'application/json'
-                }
-            });
-        }
-        else{
-            alert("留言必須少於100個字");
-        }
+        axios.patch(`${process.env.REACT_APP_API_SERVER_URL}/api/VisitorMessage/${id}`,
+        {
+            message: messages
+        },
+        {
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        });
     };
 
     const handleVisitorSubmit = (e) =>{
         // 將成員新增到資料庫
         e.preventDefault();
     
-        if ( postName && postName.length<11 && postMessage.length<=MaximumWords){
+        if ( postName && postName.length<11 && postMessage.length<=maxCount){
             axios.post(`${process.env.REACT_APP_API_SERVER_URL}/api/VisitorMessage`,
             {
                 name: postName,
@@ -56,7 +51,7 @@ const VisitorMessagePage  = () =>{
             alert("姓名不能為空值");
           } else if (postName.length>10) {
             alert("姓名必須少於10個字");
-          } else if (postMessage.length>MaximumWords) {
+          } else if (postMessage.length>maxCount) {
             alert("留言必須少於100個字");
           }
         };
@@ -68,6 +63,21 @@ const VisitorMessagePage  = () =>{
         setVisitors(newList);
         axios.delete(`${process.env.REACT_APP_API_SERVER_URL}/api/VisitorMessage/${id}`);
     };
+
+    const handleMaxCount = (board) => {
+        const { editText } = board.state;
+        const { CallbackFn } = board.props;
+        if(editText.length>maxCount){
+          alert(`字數必須少於${maxCount}`);
+        }
+        else{
+          CallbackFn(editText);
+          board.setState({
+            message: editText,
+            isEditing: false
+          });
+        }
+    }
 
     return (
         <div className="center-content">
@@ -99,14 +109,14 @@ const VisitorMessagePage  = () =>{
                             className="visitor-message-list"
                             key={item._id}
                         >
-                            <span>
+                            <span className='v-remove-b'>
                                 <button onClick={() => onRemove(item)}>刪除</button>
                             </span>
                             <div className='p-visitor-name'>
                                 {item.name}:
                             </div>
-                            <div className='p-v-message' style={{cursor: 'pointer'}}>
-                                <VisitorMessageBoard CallbackFn={(message) => handleClick(item._id, message)} MaximumWordCount={MaximumWords} message={item.message} />
+                            <div className='p-v-message'>
+                                <VisitorMessageBoard CallbackFn={(message) => handleClick(item._id, message)} LimitStateFn={handleMaxCount} message={item.message} />
                             </div>
                         </ul>;
                     })

@@ -1,15 +1,27 @@
+.input-board-container{
+    position: relative;
+    padding: 0px;
+}
+
 .board-and-btn{
     position: relative;
+    width: fit-content;
 }
 
 .board-and-btn button{
     position: absolute;
     width: 50px;
-    right: 0px;
+    right: 0;
     top: 0px;
 }
 
 .input-board{
     background: rgb(232, 232, 229);
+    cursor: 'pointer';
     border-radius: 5px;
+}
+
+.input-board-editing{
+    position: relative;
+    width: 90%;
 }

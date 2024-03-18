@@ -4,7 +4,7 @@ import "./MainLayout.css"
 
 const MainLayout = (props) => {
     return(
-        <>
+        <div className='all-content-with-layout'>
             <nav className='top_layout'>
                 <Link to="/" className="container_top_link">
                     <p className="top_link">
@@ -20,7 +20,7 @@ const MainLayout = (props) => {
                 </Link>
             </nav>
             { props.children }
-        </>
+        </div>
     )
 };
 

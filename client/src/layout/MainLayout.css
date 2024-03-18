@@ -1,9 +1,14 @@
+.all-content-with-layout{
+    position: relative;
+    width: fit-content;
+    min-width: 100%;
+}
+
 .top_layout {
     position: relative;
     display: flex;
     justify-content: center;
     background: rgb(75, 133, 221);
-    width: 1920px;
 }
 
 .top_link {
@@ -24,7 +29,6 @@
     display: flex;
     justify-content: center;
     background: rgb(174, 205, 252);
-    width: 1920px;
 }
 
 .main_link {

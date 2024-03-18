@@ -5,21 +5,25 @@
 
 .post-visitor-message-container{
     position: relative;
-    left: 665px;
+    left: 50%;
     width: fit-content;
+    transform: translate(-50%, 0);
 }
 
 .visitor-message-list{
     position: relative;
     width: 1400px;
+    padding: 2px;
+    
 }
 
 .p-visitor-name{
-    position: relative;
+    position: absolute;
     width: 50px;
     margin-left: 10px;
     left: 50px;
-    bottom: 26px;
+    top: 50%;
+    transform: translate(0, -50%);
     font-weight: bold;
     word-break: break-all;
 }
@@ -27,6 +31,12 @@
 .p-v-message{
     position: relative;
     left: 120px;
-    bottom: 56px;
-    width: 1200px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.v-remove-b{
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
 }
