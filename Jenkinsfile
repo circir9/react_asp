@@ -34,12 +34,13 @@ pipeline{
             }
         }
 
-        // stage('Testing with cypress') {
-        //     steps {
-        //         sh 'cd client'
-        //         sh 'npx cypress run'
-        //     }
-        // }
+        stage('Testing with cypress') {
+            steps {
+                dir("client"){
+                    sh 'npx cypress run'
+                }
+            }
+        }
     }
     post {
             always {
