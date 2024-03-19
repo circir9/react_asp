@@ -26,10 +26,8 @@ pipeline{
             steps {
                 dir("server"){
                     sh "pwd"
+                    sh 'nohup dotnet run &'
                 }
-                sh 'cd server'
-                sh 'pwd'
-                sh 'dotnet run'
             }
         }
 
