@@ -14,6 +14,7 @@ pipeline{
                     sh 'npm install'
                 }
             }
+        }
 
         stage('Start react server') {
             steps {
