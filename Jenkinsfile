@@ -24,7 +24,9 @@ pipeline{
 
         stage('Start C# api server') {
             steps {
-                sh 'cd react_csharp_cypress_test'
+                dir("server"){
+                    sh "pwd"
+                }
                 sh 'cd server'
                 sh 'pwd'
                 sh 'dotnet run'
