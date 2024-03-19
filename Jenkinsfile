@@ -25,7 +25,7 @@ pipeline{
         stage('Start C# api server') {
             steps {
                 sh 'cd server'
-                sh 'nohup dotnet run &'
+                sh 'dotnet run'
             }
         }
 
