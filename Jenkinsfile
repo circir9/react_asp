@@ -8,24 +8,24 @@ pipeline{
     agent any
     
     stages{
-        // stage('Install'){
-        //     steps{
-        //         sh 'cd client'
-        //         sh 'npm install'
-        //     }
-        // }
+        stage('Install'){
+            steps{
+                dir("client"){
+                    sh 'npm install'
+                }
+            }
 
-        // stage('Start react server') {
-        //     steps {
-        //         sh 'cd client'
-        //         sh 'nohup npm run start &'
-        //     }
-        // }
+        stage('Start react server') {
+            steps {
+                dir("client"){
+                    sh 'npm run start &'
+                }
+            }
+        }
 
         stage('Start C# api server') {
             steps {
                 dir("server"){
-                    sh "pwd"
                     sh 'dotnet run &'
                 }
             }
