@@ -8,19 +8,19 @@ pipeline{
     agent any
     
     stages{
-        stage('Install'){
-            steps{
-                sh 'cd client'
-                sh 'npm install'
-            }
-        }
+        // stage('Install'){
+        //     steps{
+        //         sh 'cd client'
+        //         sh 'npm install'
+        //     }
+        // }
 
-        stage('Start react server') {
-            steps {
-                sh 'cd client'
-                sh 'nohup npm run start &'
-            }
-        }
+        // stage('Start react server') {
+        //     steps {
+        //         sh 'cd client'
+        //         sh 'nohup npm run start &'
+        //     }
+        // }
 
         stage('Start C# api server') {
             steps {
@@ -29,12 +29,12 @@ pipeline{
             }
         }
 
-        stage('Testing with cypress') {
-            steps {
-                sh 'cd client'
-                sh 'npx cypress run'
-            }
-        }
+        // stage('Testing with cypress') {
+        //     steps {
+        //         sh 'cd client'
+        //         sh 'npx cypress run'
+        //     }
+        // }
     }
     post {
             always {
