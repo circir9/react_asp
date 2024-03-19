@@ -26,7 +26,7 @@ pipeline{
             steps {
                 dir("server"){
                     sh "pwd"
-                    sh 'dotnet run'
+                    sh 'dotnet run &'
                 }
             }
         }
