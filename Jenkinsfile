@@ -8,10 +8,39 @@ pipeline{
     agent any
     
     stages{
-        stage('Test'){
+        stage('Install'){
             steps{
-                echo "hihihi"
-                echo "hihihi"
+                sh 'cd client'
+                sh 'npm install'
+            }
+        }
+
+        stage('Start react server') {
+            steps {
+                sh 'cd client'
+                sh 'nohup npm run start &'
+            }
+        }
+
+        stage('Start C# api server') {
+            steps {
+                sh 'cd server'
+                sh 'nohup dotnet run &'
+            }
+        }
+
+        stage('Testing with cypress') {
+            steps {
+                sh 'cd client'
+                sh 'npx cypress run'
+            }
+        }
+
+        post {
+            // shutdown the server running in the background
+            always {
+                echo 'Stopping local server'
+                sh 'pkill -f http-server'
             }
         }
     }
