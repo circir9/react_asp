@@ -35,12 +35,11 @@ pipeline{
                 sh 'npx cypress run'
             }
         }
-
-        post {
+    }
+    post {
             always {
                 echo 'Stopping local server'
                 sh 'pkill -f http-server'
             }
         }
-    }
 }
