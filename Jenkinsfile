@@ -32,6 +32,7 @@ pipeline{
 
         stage('Start C# api server') {
             steps {
+                echo 'try'
                 dir("server"){
                     sh 'dotnet run'
                 }
