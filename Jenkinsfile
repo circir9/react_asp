@@ -8,7 +8,7 @@ pipeline{
     // agent any
 
     agent {
-        docker { image 'cypress_dotnet:latest' }
+        docker { image 'cypress_included_dotnet:latest' }
     }
 
     // tools {nodejs "16.18.0"}
