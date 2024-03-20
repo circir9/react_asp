@@ -13,7 +13,7 @@ pipeline{
 
     // tools {nodejs "16.18.0"}
     options{
-        // add ansicolor plugin
+
         ansiColor('xterm')
     }
     
