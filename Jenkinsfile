@@ -18,14 +18,14 @@ pipeline{
     }
     
     stages{
-        stage('Install'){
-            steps{
-                dir("client"){
-                    sh 'npm install'
-                    sh './node_modules/.bin/cypress install'
-                }
-            }
-        }
+        // stage('Install'){
+        //     steps{
+        //         dir("client"){
+        //             sh 'npm install'
+        //             sh './node_modules/.bin/cypress install'
+        //         }
+        //     }
+        // }
 
         stage('Start react server') {
             steps {
