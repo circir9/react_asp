@@ -32,20 +32,19 @@ pipeline{
 
         stage('Start C# api server') {
             steps {
-                echo 'try'
                 dir("server"){
-                    sh 'dotnet run'
+                    sh 'dotnet run &'
                 }
             }
         }
 
-        // stage('Testing with cypress') {
-        //     steps {
-        //         dir("client"){
-        //             sh "npx cypress run --spec 'cypress/e2e/*' --config video=false"
-        //         }
-        //     }
-        // }
+        stage('Testing with cypress') {
+            steps {
+                dir("client"){
+                    sh "npx cypress run --spec 'cypress/e2e/*' --config video=false"
+                }
+            }
+        }
     }
     post {
             always {
