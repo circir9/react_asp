@@ -29,7 +29,7 @@ pipeline{
         stage('Start C# api server') {
             steps {
                 dir("server"){
-                    sh 'dotnet run &'
+                    sh 'dotnet run'
                 }
             }
         }
