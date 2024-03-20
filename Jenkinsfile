@@ -13,7 +13,7 @@ pipeline{
 
     // tools {nodejs "16.18.0"}
     options{
-
+        // add ansicolor plugin
         ansiColor('xterm')
     }
     
@@ -51,10 +51,10 @@ pipeline{
             }
         }
     }
-    post {
-            always {
-                echo 'Stopping local server'
-                sh 'pkill -f http-server'
-            }
-        }
+    // post {
+    //         always {
+    //             echo 'Stopping local server'
+    //             sh 'pkill -f http-server'
+    //         }
+    //     }
 }
