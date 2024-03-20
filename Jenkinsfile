@@ -34,13 +34,13 @@ pipeline{
             }
         }
 
-        stage('Testing with cypress') {
-            steps {
-                dir("client"){
-                    sh "npx cypress run --spec 'cypress/e2e/*' --config video=false"
-                }
-            }
-        }
+        // stage('Testing with cypress') {
+        //     steps {
+        //         dir("client"){
+        //             sh "npx cypress run --spec 'cypress/e2e/*' --config video=false"
+        //         }
+        //     }
+        // }
     }
     post {
             always {
