@@ -12,13 +12,16 @@ pipeline{
     }
 
     // tools {nodejs "16.18.0"}
+    options{
+        ansiColor('xterm')
+    }
     
     stages{
         stage('Install'){
             steps{
                 dir("client"){
                     sh 'npm install'
-                    sh './node_modules/.bin/cypress install --force'
+                    sh './node_modules/.bin/cypress install'
                 }
             }
         }
