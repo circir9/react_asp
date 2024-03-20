@@ -18,7 +18,7 @@ pipeline{
             steps{
                 dir("client"){
                     sh 'npm install'
-                    sh './node_modules/.bin/cypress install'
+                    sh './node_modules/.bin/cypress install --force'
                 }
             }
         }
