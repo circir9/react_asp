@@ -5,9 +5,13 @@
 // }
 
 pipeline{
-    agent any
+    // agent any
 
-    tools {nodejs "16.18.0"}
+    agent {
+        docker { image 'cypress_dotnet:latest' }
+    }
+
+    // tools {nodejs "16.18.0"}
     
     stages{
         stage('Install'){
