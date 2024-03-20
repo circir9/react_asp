@@ -18,6 +18,7 @@ pipeline{
             steps{
                 dir("client"){
                     sh 'npm install'
+                    sh 'npx cypress install'
                     sh 'cypress install'
                 }
             }
