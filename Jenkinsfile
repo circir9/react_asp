@@ -22,6 +22,7 @@ pipeline{
             steps{
                 dir("client"){
                     echo 'npm install'
+                    sh 'export CYPRESS_CACHE_FOLDER="./cache/Cypress"'
                     sh 'npm install' 
                     // sh './node_modules/.bin/cypress install'
                 }
