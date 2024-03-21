@@ -10,7 +10,7 @@ pipeline{
     agent {
         docker { 
             image 'cypress_dotnet:latest'
-            args '--env CYPRESS_CACHE_FOLDER=./client' }
+            args '--env CYPRESS_CACHE_FOLDER="./client"' }
     }
 
     // tools {nodejs "16.18.0"}
