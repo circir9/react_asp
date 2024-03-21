@@ -22,6 +22,7 @@ pipeline{
             steps{
                 dir("client"){
                     sh 'npm install'
+                    // try
                     // sh './node_modules/.bin/cypress install'
                 }
             }
