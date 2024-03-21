@@ -21,6 +21,7 @@ pipeline{
         stage('Install'){
             steps{
                 dir("client"){
+                    echo 'npm install'
                     sh 'npm install'
                     // sh './node_modules/.bin/cypress install'
                 }
@@ -46,6 +47,7 @@ pipeline{
         stage('Testing with cypress') {
             steps {
                 dir("client"){
+                    sh 'npx cypress cache path'
                     sh "npx cypress run --spec 'cypress/e2e/*' --config video=false"
                 }
             }
