@@ -17,6 +17,10 @@ pipeline{
         // add ansicolor plugin
         ansiColor('xterm')
     }
+
+    environment {
+        CYPRESS_CACHE_FOLDER = "react_csharp_cypress_test/.Cache/Cypress"
+    }
     
     stages{
         stage('Install'){
