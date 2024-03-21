@@ -24,6 +24,7 @@ pipeline{
             steps{
                 dir("client"){
                     echo 'npm install'
+                    sh 'ls ./cache/Cypress'
                     sh 'npm install' 
                     // sh './node_modules/.bin/cypress install'
                 }
