@@ -29,7 +29,7 @@ pipeline{
                     echo 'npm install'
                     sh 'npm install'
                     // sh 'ls /home/node/.cache/Cypress'
-                    sh './node_modules/.bin/cypress install'
+                    // sh './node_modules/.bin/cypress install'
                 }
             }
         }
