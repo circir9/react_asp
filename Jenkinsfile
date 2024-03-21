@@ -23,7 +23,6 @@ pipeline{
                 dir("client"){
                     echo 'npm install'
                     sh 'npm install' 
-                    // cache
                     // sh './node_modules/.bin/cypress install'
                 }
             }
