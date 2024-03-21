@@ -9,6 +9,7 @@ pipeline{
 
     agent {
         docker { 
+            // cypress+dotnet image
             image 'cypress_dotnet:latest' }
     }
 
