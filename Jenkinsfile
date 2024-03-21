@@ -8,7 +8,7 @@ pipeline{
     // agent any
 
     agent {
-        docker { image 'cypress_included_dotnet:latest' }
+        docker { image 'cypress_dotnet:latest' }
     }
 
     // tools {nodejs "16.18.0"}
@@ -22,7 +22,6 @@ pipeline{
             steps{
                 dir("client"){
                     sh 'npm install'
-                    // try
                     // sh './node_modules/.bin/cypress install'
                 }
             }
