@@ -19,6 +19,7 @@ pipeline{
     }
 
     environment {
+        // change cache folder to there
         CYPRESS_CACHE_FOLDER = "react_csharp_cypress_test/.Cache/Cypress"
     }
     
@@ -28,7 +29,6 @@ pipeline{
                 dir("client"){
                     echo 'npm install'
                     sh 'npm install'
-                    // sh 'ls /home/node/.cache/Cypress'
                     // sh './node_modules/.bin/cypress install'
                 }
             }
