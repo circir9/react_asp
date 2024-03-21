@@ -9,8 +9,7 @@ pipeline{
 
     agent {
         docker { 
-            image 'cypress_dotnet:latest'
-            args '--env CYPRESS_CACHE_FOLDER="./client"' }
+            image 'cypress_dotnet:latest' }
     }
 
     // tools {nodejs "16.18.0"}
@@ -25,7 +24,7 @@ pipeline{
                 dir("client"){
                     echo 'npm install'
                     sh 'npm install'
-                    sh 'ls' 
+                    sh 'ls /home/node/.cache/Cypress'
                     // sh './node_modules/.bin/cypress install'
                 }
             }
