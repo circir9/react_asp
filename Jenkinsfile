@@ -22,9 +22,8 @@ pipeline{
             steps{
                 dir("client"){
                     echo 'npm install'
-                    sh 'npm install'
-                    sh "mkdir /home/jenkins/.cache/"
-                    sh "mv /root/.cache/Cypress/ /home/jenkins/.cache/" 
+                    sh 'npm install' 
+                    // cache
                     // sh './node_modules/.bin/cypress install'
                 }
             }
