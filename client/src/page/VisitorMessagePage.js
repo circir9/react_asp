@@ -82,7 +82,7 @@ const VisitorMessagePage  = () =>{
     return (
         <div className="center-content">
             <div className='post-visitor-message-container'>
-                <span style={{margin: 5}}>
+                <span className='v-post-name-input-container' style={{margin: 5}}>
                 請輸入姓名:
                 <input
                     style={{margin: 3}}
@@ -91,12 +91,12 @@ const VisitorMessagePage  = () =>{
                     onChange={(e) => setPostName(e.target.value)}
                 />
                 </span>
-                <span style={{margin: 5}}>
+                <span className='v-post-message-input-container'>
                 請輸入留言:
-                <input
+                <textarea
+                    className='v-post-message-input'
                     style={{margin: 3}}
-                    type="text"
-                    placeholder="Message"
+                    value={postMessage}
                     onChange={(e) => setPostMessage(e.target.value)}
                 />
                 </span>

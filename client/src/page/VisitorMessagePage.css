@@ -1,3 +1,7 @@
+.center-content{
+    padding: 0px;
+}
+
 .message-board-container{
     position: relative;
     width: 1500px;
@@ -5,6 +9,7 @@
 
 .post-visitor-message-container{
     position: relative;
+    margin-bottom: 100px;
     left: 50%;
     width: fit-content;
     transform: translate(-50%, 0);
@@ -39,4 +44,12 @@
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
+}
+
+.v-post-message-input{
+    position: relative;
+    resize: none;
+    top: 100px;
+    height: 200px;
+    width: 300px;
 }
