@@ -91,7 +91,7 @@ const VisitorMessagePage  = () =>{
                     onChange={(e) => setPostName(e.target.value)}
                 />
                 </span>
-                <span className='v-post-message-input-container'>
+                <div className='v-post-message-input-container'>
                 請輸入留言:
                 <textarea
                     className='v-post-message-input'
@@ -99,7 +99,7 @@ const VisitorMessagePage  = () =>{
                     value={postMessage}
                     onChange={(e) => setPostMessage(e.target.value)}
                 />
-                </span>
+                </div>
                 <button onClick={handleVisitorSubmit}>新增</button>
             </div>
             <div className="message-board-container">

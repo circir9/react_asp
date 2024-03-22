@@ -5,19 +5,24 @@
 .message-board-container{
     position: relative;
     width: 1500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .post-visitor-message-container{
     position: relative;
-    margin-bottom: 100px;
     left: 50%;
     width: fit-content;
     transform: translate(-50%, 0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .visitor-message-list{
     position: relative;
-    width: 1400px;
+    width: fit-content;
     padding: 2px;
     
 }
@@ -49,7 +54,13 @@
 .v-post-message-input{
     position: relative;
     resize: none;
-    top: 100px;
     height: 200px;
     width: 300px;
+}
+
+.v-post-message-input-container{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
