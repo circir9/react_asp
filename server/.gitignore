@@ -16,6 +16,7 @@ Properties/
 appsettings.Development.json
 appsettings.json
 
+Migrations/
 
 # ignore build outputs
 [Dd]ebug/
