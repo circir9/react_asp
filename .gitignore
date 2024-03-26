@@ -11,13 +11,7 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 
-# app settings
-Properties/
-appsettings.Development.json
-appsettings.json
-
-Upload/
-Migrations/
+react_asp.sln
 
 # ignore build outputs
 [Dd]ebug/
