@@ -8,17 +8,27 @@ namespace server.Controllers;
 [Route("api/[controller]")]
 public class UploadDownloadController : ControllerBase{
     private readonly string _SaveFilesDir;
-    public UploadDownloadController(){
-        _SaveFilesDir = "Upload/files";
+    private readonly MyUploadDownSetting _MyUploadDownSetting;
+    private AppDbContext _sqlServerContext;
+
+    public UploadDownloadController(AppDbContext context, MyUploadDownSetting uploadDownSetting){
+        _sqlServerContext = context;
+        _MyUploadDownSetting = uploadDownSetting;
+        _SaveFilesDir = _MyUploadDownSetting.FilesDir;
     }
 
     private async Task<string> WriteFile(IFormFile file){
         string filename = "";
-        try{
-            var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
-            filename = DateTime.Now.Ticks.ToString() + extension;
+        string originFileName = "";
+        string userName = "nobody";
+        DateTime uploadTime = DateTime.Now;
 
-            var filepath = Path.Combine(Directory.GetCurrentDirectory(), _SaveFilesDir);
+        try{
+            originFileName = file.FileName;
+            var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
+            filename = uploadTime.Ticks.ToString() + extension;
+
+            string filepath = Path.Combine(Directory.GetCurrentDirectory(), _SaveFilesDir);
 
             if(!Directory.Exists(filepath)){
                 Directory.CreateDirectory(filepath);
@@ -28,6 +38,13 @@ public class UploadDownloadController : ControllerBase{
             using (var stream = new FileStream(exactpath, FileMode.Create)){
                 await file.CopyToAsync(stream);
             }
+
+            _sqlServerContext.Upload_files.Add(new Upload_file{
+                File_name = originFileName,
+                Path = exactpath,
+                User_name = userName,
+                Upload_time = uploadTime});
+            _sqlServerContext.SaveChanges();
 
             return filename;
         }
@@ -47,14 +64,22 @@ public class UploadDownloadController : ControllerBase{
             return Ok(result);
         }
         catch(Exception ex){
-            throw ex;
+            return StatusCode(500, $"Internal server error: {ex.Message}");
         }
     }
 
     [HttpGet]
     [Route("DownloadFile")]
-    public async Task<IActionResult> DownloadFile(string filename){
-        var filepath = Path.Combine(Directory.GetCurrentDirectory(), _SaveFilesDir, filename);
+    public async Task<IActionResult> DownloadFile(int ID){
+        string filepath="";
+        var dbfile = _sqlServerContext.Upload_files.SingleOrDefault(x => x.ID == ID);
+        if (dbfile != null){
+            filepath = dbfile.Path;
+        }
+        // var filepath = Path.Combine(Directory.GetCurrentDirectory(), _SaveFilesDir, filename);
+        if (!System.IO.File.Exists(filepath)){
+            return NotFound();
+        }
 
         var provider = new FileExtensionContentTypeProvider();
         if(!provider.TryGetContentType(filepath, out var contenttype)){
@@ -63,5 +88,43 @@ public class UploadDownloadController : ControllerBase{
 
         var bytes = await System.IO.File.ReadAllBytesAsync(filepath);
         return File(bytes, contenttype, Path.GetFileName(filepath));
+    }
+
+    [HttpDelete]
+    [Route("DeleteFile")]
+    public IActionResult DeleteFile(int ID){
+        try{
+            string filepath="";
+            var dbfile = _sqlServerContext.Upload_files.SingleOrDefault(x => x.ID == ID);
+            if (dbfile != null){
+                filepath = dbfile.Path;
+                _sqlServerContext.Upload_files.Remove(dbfile);
+                _sqlServerContext.SaveChanges();
+            }
+            // var filepath = Path.Combine(Directory.GetCurrentDirectory(), _SaveFilesDir, filename);
+            
+            if (!System.IO.File.Exists(filepath)){
+                return NotFound();
+            }
+
+            System.IO.File.Delete(filepath);
+            return NoContent();
+        }
+        catch (Exception ex){
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
+    [HttpGet]
+    [Route("Files")]
+    public ActionResult<IEnumerable<GetAllFilesModel>> GetAll(){
+
+        var results = _sqlServerContext.Upload_files
+        .Select(x =>new GetAllFilesModel{
+            ID = x.ID,
+            File_name = x.File_name,
+            Upload_time = x.Upload_time}).ToList();
+
+        return results;
     }
 }

@@ -1,4 +1,4 @@
-namespace SCSharpMongoConfig.Data;
+namespace server.Data;
 
 public class SCSharpDatabaseSettings
 {

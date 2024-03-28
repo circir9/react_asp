@@ -1,4 +1,4 @@
-namespace VisitorManager.Models;
+namespace server.Models;
 
 public class Visitor
 {

@@ -5,5 +5,5 @@ public class AppDbContext:DbContext{
 
     }
 
-    public DbSet<Upload_file>? Upload_files { get; set; }
+    public DbSet<Upload_file> Upload_files { get; set; }
 }

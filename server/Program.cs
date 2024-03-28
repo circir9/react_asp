@@ -1,5 +1,5 @@
-global using VisitorManager.Models;
-global using SCSharpMongoConfig.Data;
+global using server.Models;
+global using server.Data;
 global using MongoDB.Bson;
 global using MongoDB.Bson.Serialization.Attributes;
 global using MongoDB.Driver;
@@ -28,6 +28,8 @@ builder.Services.AddDbContext<AppDbContext>(
     options=>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"))
 );
+
+builder.Services.AddSingleton<MyUploadDownSetting>();
 // builder.Services.AddSingleton<VisitorService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
