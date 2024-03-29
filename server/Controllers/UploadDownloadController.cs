@@ -81,12 +81,17 @@ public class UploadDownloadController : ControllerBase{
     [HttpGet]
     [Route("DownloadFile")]
     public async Task<IActionResult> DownloadFile(int ID){
-        string filepath="";
+        string filepath = "";
+        string filename = "";
         var dbfile = _sqlServerContext.Upload_files.SingleOrDefault(x => x.ID == ID);
         if (dbfile is not null){
             var dbfilePath = dbfile.Path;
+            var dbfileFileName = dbfile.File_name;
             if(dbfilePath is not null){
                 filepath = dbfilePath;
+            }
+            if(dbfileFileName is not null){
+                filename = dbfileFileName;
             }
         }
 
@@ -100,7 +105,8 @@ public class UploadDownloadController : ControllerBase{
         }
 
         var bytes = await System.IO.File.ReadAllBytesAsync(filepath);
-        return File(bytes, contenttype, Path.GetFileName(filepath));
+        // return File(bytes, contenttype, Path.GetFileName(filepath));
+        return File(bytes, contenttype, filename);
     }
 
     [HttpDelete]
