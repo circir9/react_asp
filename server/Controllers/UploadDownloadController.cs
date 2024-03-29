@@ -87,12 +87,8 @@ public class UploadDownloadController : ControllerBase{
         if (dbfile is not null){
             var dbfilePath = dbfile.Path;
             var dbfileFileName = dbfile.File_name;
-            if(dbfilePath is not null){
-                filepath = dbfilePath;
-            }
-            if(dbfileFileName is not null){
-                filename = dbfileFileName;
-            }
+            filepath = dbfilePath ?? filepath;
+            filename = dbfileFileName ?? filename;
         }
 
         if (!System.IO.File.Exists(filepath)){
@@ -117,9 +113,8 @@ public class UploadDownloadController : ControllerBase{
             var dbfile = _sqlServerContext.Upload_files.SingleOrDefault(x => x.ID == ID);
             if (dbfile is not null){
                 var dbfilePath = dbfile.Path;
-                if(dbfilePath is not null){
-                    filepath = dbfilePath;
-                }
+                filepath = dbfilePath ?? filepath;
+
                 _sqlServerContext.Upload_files.Remove(dbfile);
                 _sqlServerContext.SaveChanges();
             }
