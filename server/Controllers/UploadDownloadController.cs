@@ -17,12 +17,12 @@ public class UploadDownloadController : ControllerBase{
         _SaveFilesDir = _MyUploadDownSetting.FilesDir;
     }
 
-    private async Task<GetAllFilesModel> WriteFile(IFormFile file){
+    private async Task<GetFileModel> WriteFile(IFormFile file){
         string filename = "";
         string originFileName = "";
         string userName = "nobody";
         DateTime uploadTime = DateTime.Now;
-        GetAllFilesModel returnFile = new GetAllFilesModel();
+        GetFileModel returnFile = new GetFileModel();
 
         try{
             originFileName = file.FileName;
@@ -47,7 +47,7 @@ public class UploadDownloadController : ControllerBase{
                 Upload_time = uploadTime});
             _sqlServerContext.SaveChanges();
 
-            returnFile = new GetAllFilesModel{
+            returnFile = new GetFileModel{
                 ID = _sqlServerContext.Upload_files.SingleOrDefault(x => x.Upload_time == uploadTime).ID,
                 File_name = originFileName,
                 Upload_time = uploadTime
@@ -83,7 +83,7 @@ public class UploadDownloadController : ControllerBase{
         if (dbfile != null){
             filepath = dbfile.Path;
         }
-        // var filepath = Path.Combine(Directory.GetCurrentDirectory(), _SaveFilesDir, filename);
+
         if (!System.IO.File.Exists(filepath)){
             return NotFound();
         }
@@ -108,7 +108,6 @@ public class UploadDownloadController : ControllerBase{
                 _sqlServerContext.Upload_files.Remove(dbfile);
                 _sqlServerContext.SaveChanges();
             }
-            // var filepath = Path.Combine(Directory.GetCurrentDirectory(), _SaveFilesDir, filename);
             
             if (!System.IO.File.Exists(filepath)){
                 return NotFound();
@@ -124,10 +123,10 @@ public class UploadDownloadController : ControllerBase{
 
     [HttpGet]
     [Route("Files")]
-    public ActionResult<IEnumerable<GetAllFilesModel>> GetAll(){
+    public ActionResult<IEnumerable<GetFileModel>> GetAll(){
 
         var results = _sqlServerContext.Upload_files
-        .Select(x =>new GetAllFilesModel{
+        .Select(x =>new GetFileModel{
             ID = x.ID,
             File_name = x.File_name,
             Upload_time = x.Upload_time}).ToList();

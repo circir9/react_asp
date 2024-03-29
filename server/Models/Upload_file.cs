@@ -12,7 +12,7 @@ public class Upload_file{
     public DateTime Upload_time { get; set; }
 }
 
-public class GetAllFilesModel
+public class GetFileModel
 {
     public int ID { get; set; }
     public string? File_name { get; set; }
