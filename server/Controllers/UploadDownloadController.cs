@@ -22,7 +22,7 @@ public class UploadDownloadController : ControllerBase{
         string originFileName = "";
         string userName = "nobody";
         DateTime uploadTime = DateTime.Now;
-        GetFileModel returnFile = new GetFileModel();
+        GetFileModel returnFile = new();
 
         try{
             originFileName = file.FileName;
@@ -47,11 +47,14 @@ public class UploadDownloadController : ControllerBase{
                 Upload_time = uploadTime});
             _sqlServerContext.SaveChanges();
 
-            returnFile = new GetFileModel{
-                ID = _sqlServerContext.Upload_files.SingleOrDefault(x => x.Upload_time == uploadTime).ID,
-                File_name = originFileName,
-                Upload_time = uploadTime
-            };
+            var dbfile = _sqlServerContext.Upload_files.SingleOrDefault(x => x.Upload_time == uploadTime);
+            if(dbfile is not null){
+                returnFile = new GetFileModel{
+                    ID = dbfile.ID,
+                    File_name = originFileName,
+                    Upload_time = uploadTime
+                };
+            }
 
             return returnFile;
         }
@@ -80,8 +83,11 @@ public class UploadDownloadController : ControllerBase{
     public async Task<IActionResult> DownloadFile(int ID){
         string filepath="";
         var dbfile = _sqlServerContext.Upload_files.SingleOrDefault(x => x.ID == ID);
-        if (dbfile != null){
-            filepath = dbfile.Path;
+        if (dbfile is not null){
+            var dbfilePath = dbfile.Path;
+            if(dbfilePath is not null){
+                filepath = dbfilePath;
+            }
         }
 
         if (!System.IO.File.Exists(filepath)){
@@ -103,8 +109,11 @@ public class UploadDownloadController : ControllerBase{
         try{
             string filepath="";
             var dbfile = _sqlServerContext.Upload_files.SingleOrDefault(x => x.ID == ID);
-            if (dbfile != null){
-                filepath = dbfile.Path;
+            if (dbfile is not null){
+                var dbfilePath = dbfile.Path;
+                if(dbfilePath is not null){
+                    filepath = dbfilePath;
+                }
                 _sqlServerContext.Upload_files.Remove(dbfile);
                 _sqlServerContext.SaveChanges();
             }
