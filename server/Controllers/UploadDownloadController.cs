@@ -17,11 +17,12 @@ public class UploadDownloadController : ControllerBase{
         _SaveFilesDir = _MyUploadDownSetting.FilesDir;
     }
 
-    private async Task<string> WriteFile(IFormFile file){
+    private async Task<GetAllFilesModel> WriteFile(IFormFile file){
         string filename = "";
         string originFileName = "";
         string userName = "nobody";
         DateTime uploadTime = DateTime.Now;
+        GetAllFilesModel returnFile = new GetAllFilesModel();
 
         try{
             originFileName = file.FileName;
@@ -46,11 +47,17 @@ public class UploadDownloadController : ControllerBase{
                 Upload_time = uploadTime});
             _sqlServerContext.SaveChanges();
 
-            return filename;
+            returnFile = new GetAllFilesModel{
+                ID = _sqlServerContext.Upload_files.SingleOrDefault(x => x.Upload_time == uploadTime).ID,
+                File_name = originFileName,
+                Upload_time = uploadTime
+            };
+
+            return returnFile;
         }
         catch{
         }
-        return filename;
+        return returnFile;
     }
 
     [HttpPost]
