@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace server.Controllers;
 
@@ -16,6 +17,8 @@ public class VisitorMessageController : ControllerBase{
     }
 
     [HttpGet]
+    // 需要權限
+    // [Authorize]
     public async Task<ActionResult<List<Visitor>>> GetAll(){
         var visitors = await _visitors.Find(_ => true).ToListAsync();
         return visitors;
