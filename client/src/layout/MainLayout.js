@@ -23,6 +23,11 @@ const MainLayout = (props) => {
                         檔案上傳
                     </p>
                 </Link>
+                <Link to="/login" className="container_main_link">
+                    <p className="main_link">
+                        登入
+                    </p>
+                </Link>
             </nav>
             { props.children }
         </div>

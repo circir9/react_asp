@@ -1,6 +1,7 @@
 import HomePage from "./page/HomePage";
 import VisitorMessagePage from "./page/VisitorMessagePage";
 import FileUpDownPage from "./page/FileUpDownPage";
+import LoginPage from "./page/LoginPage";
 import MainLayout from "./layout/MainLayout";
 import React from 'react';
 import {HashRouter,Route,Routes} from "react-router-dom";
@@ -22,6 +23,11 @@ function App() {
             <Route path="/up_down_file" element={
                 <MainLayout>
                     <FileUpDownPage />
+                </MainLayout>
+            }/>
+            <Route path="/login" element={
+                <MainLayout>
+                    <LoginPage />
                 </MainLayout>
             }/>
         </Routes>
