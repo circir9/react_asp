@@ -43,3 +43,7 @@
 .main_link:hover {
     background-color: #dded81;
   }
+
+.container_main_btn{
+    cursor: pointer;
+}

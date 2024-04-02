@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
 import {Link} from "react-router-dom";
 import "./MainLayout.css"
+import LogoutButton from "../components/Authentication/LogoutButton"
 
 const MainLayout = (props) => {
     return(
@@ -33,6 +34,9 @@ const MainLayout = (props) => {
                         註冊
                     </p>
                 </Link>
+                <a className="container_main_btn">
+                    <LogoutButton/>
+                </a>
             </nav>
             { props.children }
         </div>
