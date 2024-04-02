@@ -28,6 +28,11 @@ const MainLayout = (props) => {
                         登入
                     </p>
                 </Link>
+                <Link to="/signup" className="container_main_link">
+                    <p className="main_link">
+                        註冊
+                    </p>
+                </Link>
             </nav>
             { props.children }
         </div>
