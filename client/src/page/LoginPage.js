@@ -23,7 +23,7 @@ const LoginPage = () => {
             const { token } = response.data;
 
             if (token) {
-                localStorage.setItem("session_id", token);
+                localStorage.setItem("token", token);
                 console.log('登入成功');
                 navigate(`/`);
             }
