@@ -132,7 +132,7 @@ public class AuthenticateController : ControllerBase
         var token = new JwtSecurityToken(   // 亦可使用　SecurityTokenDescriptor　來産生 Token
             issuer: _configuration.GetValue<string>("JwtSettings:ValidIssuer"),
             audience: _configuration.GetValue<string>("JwtSettings:ValidAudience"),
-            expires: DateTime.Now.AddDays(1),
+            expires: DateTime.Now.AddDays(1), // lifetime
             claims: claims,
             signingCredentials: credentials);
 
@@ -146,10 +146,20 @@ public class AuthenticateController : ControllerBase
         return Ok(User.Claims.Select(p => new { p.Type, p.Value }));
     }
 
-    // [Authorize]
-    // [HttpGet("~/username")]
-    // public IActionResult GetUserName()
-    // {
-    //     return Ok(User.Identity.Name);
-    // }
+    [Authorize]
+    [HttpGet("~/username")]
+    public IActionResult GetUserName()
+    {
+        var claimsIdentity = User.Identity as ClaimsIdentity;
+
+        var userName = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
+        Console.WriteLine(ClaimTypes.Name);
+
+        if (string.IsNullOrEmpty(userName))
+        {
+            return NotFound();
+        }
+
+        return Ok(userName);
+    }
 }
