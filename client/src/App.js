@@ -3,6 +3,7 @@ import VisitorMessagePage from "./page/VisitorMessagePage";
 import FileUpDownPage from "./page/FileUpDownPage";
 import LoginPage from "./page/LoginPage";
 import SignupPage from "./page/SignupPage";
+import VideoPage from "./page/VideoPage";
 import MainLayout from "./layout/MainLayout";
 import React from 'react';
 import {HashRouter,Route,Routes} from "react-router-dom";
@@ -34,6 +35,11 @@ function App() {
             <Route path="/signup" element={
                 <MainLayout>
                     <SignupPage />
+                </MainLayout>
+            }/>
+            <Route path="/video" element={
+                <MainLayout>
+                    <VideoPage />
                 </MainLayout>
             }/>
         </Routes>

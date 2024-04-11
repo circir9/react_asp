@@ -8,7 +8,7 @@ namespace server.Controllers;
 [Route("api/[controller]")]
 public class UploadDownloadController : ControllerBase{
     private readonly string _SaveFilesDir;
-    private readonly MyUploadDownSetting _MyUploadDownSetting;
+    private readonly UploadDownSettings _MyUploadDownSetting;
     private AppDbContext _sqlServerContext;
 
     public UploadDownloadController(AppDbContext context, MyUploadDownSetting uploadDownSetting){

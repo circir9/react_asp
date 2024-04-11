@@ -17,6 +17,7 @@ appsettings.Development.json
 appsettings.json
 
 Upload/
+Videos/
 Migrations/
 
 # ignore build outputs

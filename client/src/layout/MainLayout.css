@@ -46,4 +46,6 @@
 
 .container_main_btn{
     cursor: pointer;
+    color: rgb(85, 26, 139);
+    text-decoration: underline;
 }

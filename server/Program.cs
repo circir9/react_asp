@@ -95,6 +95,7 @@ builder.Services.AddControllers();
 
 
 builder.Services.AddSingleton<MyUploadDownSetting>();
+builder.Services.AddSingleton<VideoUploadDownSetting>();
 // builder.Services.AddSingleton<VisitorService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
