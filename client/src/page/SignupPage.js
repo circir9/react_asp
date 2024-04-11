@@ -23,7 +23,7 @@ const SignupPage = () => {
         .then((response) => {
             const { status } = response.data;
             console.log(response);
-            if (status != "Success") {
+            if (status !== "Success") {
                 console.log('註冊失敗');
                 alert("註冊失敗");
             }
