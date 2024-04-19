@@ -29,6 +29,11 @@ const MainLayout = (props) => {
                         影片
                     </p>
                 </Link>
+                <Link to="/chunk" className="container_main_link">
+                    <p className="main_link">
+                        大檔案上傳
+                    </p>
+                </Link>
                 <Link to="/login" className="container_main_link">
                     <p className="main_link">
                         登入

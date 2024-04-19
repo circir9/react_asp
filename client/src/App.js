@@ -4,6 +4,7 @@ import FileUpDownPage from "./page/FileUpDownPage";
 import LoginPage from "./page/LoginPage";
 import SignupPage from "./page/SignupPage";
 import VideoPage from "./page/VideoPage";
+import ChunkUploadPage from "./page/ChunkUploadPage";
 import MainLayout from "./layout/MainLayout";
 import React from 'react';
 import {HashRouter,Route,Routes} from "react-router-dom";
@@ -40,6 +41,11 @@ function App() {
             <Route path="/video" element={
                 <MainLayout>
                     <VideoPage />
+                </MainLayout>
+            }/>
+            <Route path="/chunk" element={
+                <MainLayout>
+                    <ChunkUploadPage />
                 </MainLayout>
             }/>
         </Routes>

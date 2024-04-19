@@ -15,7 +15,7 @@ public class ChunkController : ControllerBase{
     }
     // Upload save method for chunk-upload
     [HttpPost]
-    public void Save(IList<IFormFile> chunkFile)
+    public async Task<IActionResult> Save(IFormFile chunkFile, [FromQuery] int index, [FromQuery] string filename)
     {
         long size = 0;
         try
@@ -25,37 +25,36 @@ public class ChunkController : ControllerBase{
             if(!Directory.Exists(filepath)){
                 Directory.CreateDirectory(filepath);
             }
-            // for chunk-upload
-            foreach (var file in chunkFile)
-            {
-                var filename = file.FileName;
 
-                filename = Path.Combine(Directory.GetCurrentDirectory(), _SaveFilesDir, filename);
-                size += file.Length;
-                if (!System.IO.File.Exists(filename))
+            filename = Path.Combine(Directory.GetCurrentDirectory(), _SaveFilesDir, filename);
+            size += chunkFile.Length;
+            // for chunk-upload
+            if (index==0)
+            {
+                using (FileStream fs = System.IO.File.Create(filename))
                 {
-                    using (FileStream fs = System.IO.File.Create(filename))
-                    {
-                        file.CopyTo(fs);
-                        fs.Flush();
-                    }
-                }
-                else
-                {
-                    using (FileStream fs = System.IO.File.Open(filename, FileMode.Append))
-                    {
-                        file.CopyTo(fs);
-                        fs.Flush();
-                    }
+                    chunkFile.CopyTo(fs);
+                    fs.Flush();
                 }
             }
+            else
+            {
+                using (FileStream fs = System.IO.File.Open(filename, FileMode.Append))
+                {
+                    chunkFile.CopyTo(fs);
+                    fs.Flush();
+                }
+            }
+            return NoContent();
         }
         catch (Exception e)
         {
             Response.Clear();
             Response.StatusCode = 204;
+            return NoContent();
             // Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = "File failed to upload";
             // Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = e.Message;
         }
+        return NoContent();
     }
 }
